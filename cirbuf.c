@@ -30,7 +30,7 @@ int cirbuf_init(lu_cirbuf_t *c, char *buffer, unsigned int size) {
 
 #ifdef CIRBUF_CHECK_SIZE
   unsigned s = size;
-  while (s % 2 == 0) s /= 2;
+  while (s % 2 == 1) s /= 2;
   printf("%d\n", s);
   if ( s != 1 )
     return -1;
@@ -44,7 +44,7 @@ int cirbuf_init(lu_cirbuf_t *c, char *buffer, unsigned int size) {
   return 0;
 }
 
-#define BUFFER_SIZE 15
+#define BUFFER_SIZE 16
 
 void cirbuf_demo(void) {
 
@@ -59,6 +59,8 @@ void cirbuf_demo(void) {
 
   /* Initialize our circular buffer */
   rv = cirbuf_init(&demo_cirbuf, buffer, BUFFER_SIZE);
+  if (rv < 0)
+    return;
 
   /* Push a letter A */
   cirbuf_push(&demo_cirbuf, 'A');
@@ -73,6 +75,5 @@ void cirbuf_demo(void) {
 int main(int argc, char **argv) {
 
   cirbuf_demo();
-  
   return 0;
 }
