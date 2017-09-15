@@ -26,13 +26,13 @@ int cirbuf_pop(lu_cirbuf_t *c, char* data) {
   return 0;
 }
 
-int cirbuf_init(lu_cirbuf_t *c, char *buffer, unsigned int size) {
+int cirbuf_init(lu_cirbuf_t *c, char *buffer, const unsigned int size) {
 
 #ifdef CIRBUF_CHECK_SIZE
-  unsigned s = size;
-  while (s % 2 == 1) s /= 2;
+  unsigned int s = size;
+  while (s % 2 == 0) s /= 2;
   printf("%d\n", s);
-  if ( s != 1 )
+  if (s != 1)
     return -1;
 #endif
 
